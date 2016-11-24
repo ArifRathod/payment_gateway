@@ -1,0 +1,444 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>API Wrapper Demo</title>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css" media="all">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <style type="text/css">
+        .progress-indicator {
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            text-align: center;
+            /* IE filter */
+            filter: progid: DXImageTransform.Microsoft.Alpha(opacity=50);
+            -moz-opacity: 0.5;
+            /* Mozilla extension */
+            -khtml-opacity: 0.5;
+            /* Safari/Conqueror extension */
+            opacity: 0.7;
+            /* CSS3 */
+            z-index: 2000;
+            background-color: #030303;
+            display: none;
+        }
+        
+        .progress-indicator img {
+            position: fixed;
+            top: 50%;
+            height: 60px;
+            width: 60px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="progress-indicator">
+        <img  src="img/2.gif" alt="Loading data..">
+    </div>
+    <div id="wrapper">
+        <div class="section section-charge">
+            <div id="content">
+                <div id="title">API Wrapper Demo [ NodeJS ]</div>
+                <form class="go-right formsubmit" action="" method="post">
+                    <input type="hidden" name="action" value="charge">
+                    <div class="seciton section-billinginfo">
+                        <input id="Amount" name="Amount" type="hidden" value="10.00">
+                        <input id="InvNum" name="InvNum" type="hidden" value="">
+                        <input id="TipAmt" name="TipAmt" type="hidden" value="0.00">
+                        <input id="TaxAmt" name="TaxAmt" type="hidden" value="0.00">
+                        <input id="SureChargeAmt" name="SureChargeAmt" type="hidden" value="0.00">
+                        <input id="CashBackAmt" name="CashBackAmt" type="hidden" value="0.00">
+                        <input id="ExtData" name="ExtData" type="hidden" value="<force>T</force>">
+                        <!-- shipping information -->
+                        <input id="shippingStreet" name="shippingStreet" type="hidden" value="">
+                        <input id="shippingCity" name="shippingCity" type="hidden" value="">
+                        <input id="shippingState" name="shippingState" type="hidden" value="">
+                        <input id="shippingZip" name="shippingZip" type="hidden" value="">
+                        <input id="shippingCountry" name="shippingCountry" type="hidden" value="">
+                        <h4>Basic information</h4>
+                        <div class="form-group">Amount : <strong>10.00</strong></div>
+                        <div class="form-group">
+                            <select name="TransType" id="TransType">
+                                <option value="Sale">Sale</option>
+                                <option value="Auth">Auth</option>
+                            </select>
+                            <label for="TransType">TransType</label>
+                        </div>
+                        <div class="form-group">
+                            <input id="Email" name="Email" type="text" required value="test@email.com">
+                            <label for="Email">&nbsp;&nbsp; <i class="fa fa-envelope" aria-hidden="true"></i> Email </label>
+                        </div>
+                    </div>
+                    <!-- card information -->
+                    <div class="seciton section-billinginfo">
+                        <h4>Billing information</h4>
+                        <div class="form-group">
+                            <input id="Street" name="Street" type="text" required value="Test 1234 Main Street">
+                            <label for="Street">&nbsp;&nbsp;<i class="fa fa-map-marker" aria-hidden="true"></i> Address </label>
+                        </div>
+                        <div class="form-group">
+                            <input id="City" name="City" type="text" required value="Summerville">
+                            <label for="City">&nbsp;&nbsp;<i class="fa fa-map-marker" aria-hidden="true"></i> City </label>
+                        </div>
+                        <div class="form-group">
+                            <input id="State" name="State" type="text" required value="SC">
+                            <label for="State">&nbsp;&nbsp;<i class="fa fa-map-marker" aria-hidden="true"></i> State </label>
+                        </div>
+                        <div class="form-group">
+                            <input id="Zip" name="Zip" type="text" required value="29483">
+                            <label for="Zip">&nbsp;&nbsp;<i class="fa fa-map-marker" aria-hidden="true"></i> Postal Codes </label>
+                        </div>
+                        <div class="form-group">
+                            <input id="Country" name="Country" type="text" required value="US">
+                            <label for="Country">&nbsp;&nbsp;<i class="fa fa-map-marker" aria-hidden="true"></i> Country </label>
+                        </div>
+                    </div>
+                    <div class="seciton section-paymentinfo">
+                        <h4>Payment information</h4>
+                        <div class="form-group">
+                            <input id="NameOnCard" name="NameOnCard" type="text" required value="John Doe">
+                            <label for="NameOnCard">&nbsp;&nbsp;<i class="fa fa-user" aria-hidden="true"></i> Name on Card </label>
+                        </div>
+                        <div class="form-group">
+                            <input id="CardNum" name="CardNum" type="text" required value="4111111111111111">
+                            <label for="CardNum">&nbsp;&nbsp;<i class="fa fa-credit-card" aria-hidden="true"></i> Card Number </label>
+                        </div>
+                        <div class="form-group">
+                            <input id="ExpDate" name="ExpDate" type="text" required value="1233">
+                            <label for="ExpDate">&nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true"></i> Expiry MMYY </label>
+                        </div>
+                        <div class="form-group">
+                            <input id="CVNum" name="CVNum" type="text" size="35" maxlength="4" required value="123">
+                            <label for="CVNum">&nbsp;&nbsp;<i class="fa fa-lock" aria-hidden="true"></i> Card Code </label>
+                        </div>
+                        <div class="form-group last">
+                            <input id="name" name="name" type="text" size="35" maxlength="35" required value="9898989898">
+                            <label for="name">&nbsp;&nbsp;<i class="fa fa-mobile-phone" aria-hidden="true"></i> Mobile Phone</label>
+                        </div>
+                        <font size="1">Mobile number is required for PayCertify feature</font>
+                        <br>
+                        <br>
+                        <input type="checkbox" value="1" checked="checked" name="paycertifyTransaction" id="paycertifyTransaction"> PayCertify
+                        <br>
+                        <br>
+                        <button class="button" style="float: right;">Process Payment</button>
+                    </div>
+                </form>
+            </div>
+            <div id="sidebar">
+                <br />
+                <br />
+                <br />
+                    <br />
+                    <pre id="charge"></pre>
+            </div>
+            <div id="cleared"></div>
+        </div>
+        <div class="section section-charge">
+            <div id="content">
+                <div id="title">Manage Customer </div>
+                <form class="go-right formsubmit" action="" method="post">
+                    <input type="hidden" name="action" value="customer">
+                    <input type="hidden" value="102" name="CustomerID">
+                    <div class="seciton section-billinginfo">
+                        <h4>Basic information</h4>
+                        <div class="form-group">
+                            <select name="TransType" id="TransType">
+                                <option value="ADD">ADD</option>
+                                <option value="UPDATE">UPDATE</option>
+                                <option value="DELETE">DELETE</option>
+                            </select>
+                            <label for="TransType">TransType</label>
+                        </div>
+                        <div class="form-group">
+                            <input id="CustomerKey" name="CustomerKey" type="text" value="" placeholder="CustomerKey">
+                        </div>
+                        <div class="form-group">
+                            <input id="Vendor" name="Vendor" type="text" value="107" placeholder="Vendor">
+                        </div>
+                        <div class="form-group">
+                            <input id="CustomerName" name="CustomerName" type="text" value="John" placeholder="CustomerName">
+                        </div>
+                        <div class="form-group">
+                            <input id="FirstName" name="FirstName" type="text" placeholder="FirstName" value="John">
+                        </div>
+                        <div class="form-group">
+                            <input id="LastName" name="LastName" type="text" placeholder="LastName" value="Doe">
+                        </div>
+                        <div class="form-group">
+                            <input id="Title" name="Title" type="text" placeholder="Title" value="XYZ">
+                        </div>
+                        <div class="form-group">
+                            <input id="Department" name="Department" type="text" placeholder="Department" value=" Department">
+                        </div>
+                        <div class="form-group">
+                            <input id="Street" name="Street" type="text" placeholder="Street" value=" 123 Street Address ">
+                        </div>
+                        <div class="form-group">
+                            <input id="Street1" name="Street1" type="text" placeholder="Street1" value=" 123 Street Address ">
+                        </div>
+                        <div class="form-group">
+                            <input id="Street2" name="Street2" type="text" placeholder="Street2" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="Street3" name="Street3" type="text" placeholder="Street3" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="City" name="City" type="text" placeholder="City" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="StateID" name="StateID" type="text" placeholder="StateID" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="Province" name="Province" type="text" placeholder="Province" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="CountryID" name="CountryID" type="text" placeholder="CountryID" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="Zip" name="Zip" type="text" placeholder="Zip" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="DayPhone" name="DayPhone" type="text" placeholder="DayPhone" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="NightPhone" name="NightPhone" type="text" placeholder="NightPhone" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="Mobile" name="Mobile" type="text" placeholder="Mobile" maxlength="10" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="Fax" name="Fax" type="text" placeholder="Fax" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="Email" name="Email" type="text" placeholder="Email" value="">
+                        </div>
+                        <div class="form-group">
+                            <select id="Status" name="Status">
+                                <option value="ACTIVE">ACTIVE</option>
+                                <option value="INACTIVE">INACTIVE</option>
+                                <option value="PENDING">PENDING</option>
+                                <option value="CLOSED">CLOSED</option>
+                            </select>
+                        </div>
+                        <button class="button" style="float: right;">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div id="sidebar">
+                <br />
+                <br />
+                <br />
+                <br />
+                <pre id="ManageCustomer"></pre>
+            </div>
+            <div id="cleared"></div>
+        </div>
+        <div class="section section-charge">
+            <div id="content">
+                <div id="title">Manage StoreCard</div>
+                <form class="go-right formsubmit" action="" method="post">
+                    <input type="hidden" name="action" value="storecard">
+                    <div class="seciton section-billinginfo">
+                        <div class="form-group">
+                            <select name="TokenMode" id="TokenMode">
+                                <option value="DEFAULT">DEFAULT</option>
+                                <option value="CARDFORMAT">CARDFORMAT</option>
+                            </select>
+                            <label for="TokenMode">TokenMode</label>
+                        </div>
+                        <div class="form-group">
+                            <input id="NameOnCard" name="NameOnCard" type="text" required value="John Doe">
+                            <label for="NameOnCard">&nbsp;&nbsp;<i class="fa fa-user" aria-hidden="true"></i> NameOnCard </label>
+                        </div>
+                        <div class="form-group">
+                            <input id="CardNum" name="CardNum" type="text" required value="4111111111111111">
+                            <label for="CardNum">&nbsp;&nbsp;<i class="fa fa-credit-card" aria-hidden="true"></i> Card Number </label>
+                        </div>
+                        <div class="form-group">
+                            <input id="ExpDate" name="ExpDate" type="text" required value="1233">
+                            <label for="ExpDate">&nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true"></i> Expiry MMYY </label>
+                        </div>
+                        <div class="form-group">
+                            <input id="CustomerKey" name="CustomerKey" type="text" size="35" maxlength="4" required value="248">
+                            <label for="CustomerKey">&nbsp;&nbsp;<i class="fa fa-lock" aria-hidden="true"></i> Card Code </label>
+                        </div>
+                        <div class="form-group">
+                            <input id="Street" name="Street" type="text" placeholder="Street" value="123 Main Address">
+                        </div>
+                        <div class="form-group">
+                            <input id="Zip" name="Zip" type="text" placeholder="Zip" value="123">
+                        </div>
+                        <div class="form-group">
+                            <input id="ExtData" name="ExtData" type="text" placeholder="ExtData" value="">
+                        </div>
+                        <button class="button" style="float: right;">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div id="sidebar">
+                <br />
+                <br />
+                <br />
+                <br />
+                <pre id="StoreCard"></pre>
+            </div>
+            <div id="cleared"></div>
+        </div>
+        <div class="section section-charge">
+            <div id="content">
+                <div id="title">Process StoreCard</div>
+                <form class="go-right formsubmit" action="" method="post">
+                    <input type="hidden" name="action" value="processstoredcard">
+                    <div class="seciton section-billinginfo">
+                        <div class="form-group">
+                            <select id="TransType" name="TransType">
+                                <option value="Sale">Sale</option>
+                                <option value="Auth">Auth</option>
+                            </select>
+                            <label for="TransType">TransType</label>
+                        </div>
+                        <div class="form-group">
+                            <select name="TokenMode" id="TokenMode">
+                                <option value="DEFAULT">DEFAULT</option>
+                                <option value="CARDFORMAT">CARDFORMAT</option>
+                            </select>
+                            <label for="TokenMode">TokenMode</label>
+                        </div>
+                        <div class="form-group">
+                            <input id="CardToken" name="CardToken" type="text" placeholder="CardToken" value="6393251504458281">
+                        </div>
+                        <div class="form-group">
+                            <input id="Amount" name="Amount" type="text" placeholder="Amount" value="10.00">
+                        </div>
+                        <div class="form-group">
+                            <input id="InvNum" name="InvNum" type="text" placeholder="InvNum" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="ExtData" name="ExtData" type="text" placeholder="ExtData" value="">
+                        </div>
+                        <button class="button" style="float: right;">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div id="sidebar">
+                <br />
+                <br />
+                <br />
+                <br />
+                <pre id="ProcessStoredCard"></pre>
+            </div>
+            <div id="cleared"></div>
+        </div>
+        <div class="section section-charge">
+            <div id="content">
+                <div id="title">Manage Contract</div>
+                <form class="go-right formsubmit" action="" method="post">
+                    <input type="hidden" name="action" value="contract">
+                    <div class="seciton section-billinginfo">
+                        <div class="form-group">
+                            <select id="TransType" name="TransType">
+                                <option value="ADD">ADD</option>
+                                <option value="UPDATE">UPDATE</option>
+                                <option value="DELETE">DELETE</option>
+                            </select>
+                            <label for="TransType">TransType</label>
+                        </div>
+                        <div class="form-group">
+                            <input id="Vendor" name="Vendor" type="text" placeholder="Vendor" value="10.00">
+                        </div>
+                        <div class="form-group">
+                            <input id="CustomerID" name="CustomerID" type="text" placeholder="CustomerID" value="102">
+                        </div>
+                        <div class="form-group">
+                            <input id="CustomerKey" name="CustomerKey" type="text" placeholder="CustomerKey" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="BillAmt" name="BillAmt" type="text" placeholder="BillAmt" value="10.00">
+                        </div>
+                        <div class="form-group">
+                            <input id="PaymentInfoKey" name="PaymentInfoKey" type="text" placeholder="PaymentInfoKey" value="">
+                        </div>
+                        <div class="form-group">
+                            <select name="PaymentType" id="PaymentType">
+                                <option value="CARD">CARD</option>
+                                <option value="CHECK">CHECK</option>
+                            </select>
+                            <label for="TokenMode">TokenMode</label>
+                        </div>
+                        <div class="form-group">
+                            <input id="StartDate" name="StartDate" type="text" placeholder="StartDate" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="EndDate" name="EndDate" type="text" placeholder="EndDate" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="BillingPeriod" name="BillingPeriod" type="text" placeholder="BillingPeriod" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="BillingInterval" name="BillingInterval" type="text" placeholder="BillingInterval" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="ContractId" name="ContractId" type="text" placeholder="ContractId" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="ContractName" name="ContractName" type="text" placeholder="ContractName" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="TaxAmt" name="TaxAmt" type="text" placeholder="TaxAmt" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="TotalAmt" name="TotalAmt" type="text" placeholder="TotalAmt" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="MaxFailures" name="MaxFailures" type="text" placeholder="MaxFailures" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="FailureCount" name="FailureCount" type="text" placeholder="FailureCount" value="">
+                        </div>
+                        <div class="form-group">
+                            <select name="Status" id="Status">
+                                <option value="ACTIVE">ACTIVE</option>
+                                <option value="INACTIVE">INACTIVE</option>
+                                <option value="PENDING">PENDING</option>
+                                <option value="CLOSED">CLOSED</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input id="EmailMerchant" name="EmailMerchant" type="text" placeholder="EmailMerchant" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="EmailMerchantFailure" name="EmailMerchantFailure" type="text" placeholder="EmailMerchantFailure" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="EmailCustomer" name="EmailCustomer" type="text" placeholder="EmailCustomer" value="">
+                        </div>
+                        <div class="form-group">
+                            <input id="EmailCustomerFailure" name="EmailCustomerFailure" type="text" placeholder="EmailCustomerFailure" value="">
+                        </div>
+                        <button class="button" style="float: right;">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div id="sidebar">
+                <br />
+                <br />
+                <br />
+                <br />
+                <pre id="ManageContract"></pre>
+            </div>
+            <div id="cleared"></div>
+        </div>
+    </div>
+</body>
+
+</html>
